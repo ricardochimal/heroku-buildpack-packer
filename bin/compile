@@ -27,7 +27,7 @@ cd "$1"
 url="$(< .packer_url)"
 echo "Vendoring $url" | indent
 curl -L --silent --fail --retry 3 "$url" > "$1/bin/packer.zip"
-cd "$1/bin" && $unpack_command packer.zip && rm packer.zip
+(cd "$1/bin" && $unpack_command packer.zip && rm packer.zip)
 
 mkdir -p .profile.d
 echo 'export PATH="$HOME/bin:$PATH"' > .profile.d/packer.sh

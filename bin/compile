@@ -8,7 +8,8 @@ indent() {
 
 echo "-----> Found a .packer_url file"
 
-if [ ! -s "$1/.packer_url" ]; then
+url="$(< .packer_url)"
+if [ -z "$url" ]; then
     echo ".packer_url empty. Skipping." | indent
     exit 0
 fi
@@ -24,7 +25,6 @@ fi
 
 cd "$1"
 
-url="$(< .packer_url)"
 echo "Vendoring $url" | indent
 curl -L --silent --fail --retry 3 "$url" > "$1/bin/packer.zip"
 (cd "$1/bin" && $unpack_command packer.zip && rm packer.zip)

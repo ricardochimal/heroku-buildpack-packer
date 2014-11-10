@@ -6,6 +6,8 @@ indent() {
     sed -u 's/^/       /'
 }
 
+cd "$1"
+
 echo "-----> Found a .packer_url file"
 
 url="$(< .packer_url)"
@@ -22,8 +24,6 @@ else
     echo "Need unzip or jar available to unpack." >&2
     exit 1
 fi
-
-cd "$1"
 
 echo "Vendoring $url" | indent
 curl -L --silent --fail --retry 3 "$url" > "$1/bin/packer.zip"

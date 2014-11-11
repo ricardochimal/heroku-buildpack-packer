@@ -31,3 +31,9 @@ curl -L --silent --fail --retry 3 "$url" > "$1/bin/packer.zip"
 
 mkdir -p .profile.d
 echo 'export PATH="$HOME/bin:$PATH"' > .profile.d/packer.sh
+
+jq_url="http://stedolan.github.io/jq/download/linux64/jq"
+echo "-----> Downloading & Vendoring jq"
+
+curl -L --silent --fail --retry 3 "$jq_url" > "$1/bin/jq"
+chmod a+x "$1/bin/jq"
